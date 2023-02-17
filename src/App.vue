@@ -9,7 +9,14 @@ export default {
 </script>
 
 <template>
-  <HomeView />
+  <div class="container">
+    <HomeView />
+  </div>
 </template>
 
-<style></style>
+<style>
+.container {
+  width: 100%;
+  height: 100%;
+}
+</style>
