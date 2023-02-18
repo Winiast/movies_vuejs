@@ -22,6 +22,14 @@ export default {
 
 <style>
 .card {
-  background-color: red;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.card-img {
+  width: 100%;
+  height: 400px;
 }
 </style>

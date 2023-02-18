@@ -19,9 +19,4 @@ export default {
   width: 100%;
   height: 100%;
 }
-
-.navbar {
-  display: flex;
-  justify-content: space-around;
-}
 </style>
