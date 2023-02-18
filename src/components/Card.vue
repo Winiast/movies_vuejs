@@ -2,7 +2,7 @@
   <div class="card">
     <img
       class="card-img"
-      v-bind:src="`https://image.tmdb.org/t/p/w200/${filme.poster_path}`"
+      v-bind:src="`https://image.tmdb.org/t/p/w300/${filme.poster_path}`"
     />
     <div class="card-body">
       <h2 class="card-body-title">{{ filme.title }}</h2>
@@ -22,6 +22,6 @@ export default {
 
 <style>
 .card {
-  width: 200px;
+  background-color: red;
 }
 </style>

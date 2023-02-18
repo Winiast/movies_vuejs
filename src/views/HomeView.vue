@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div v-if="filmes.length != 0">
     <div class="movies" v-for="filme in filmes">
       <Card v-bind:filme="filme" />
     </div>
+  </div>
+
+  <div v-else>
+    <h1>Carregando...</h1>
   </div>
 </template>
 
@@ -44,10 +48,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .movies {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   width: 100%;
 }
 </style>
