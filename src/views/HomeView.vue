@@ -1,6 +1,6 @@
 <template>
   <div class="movies" v-if="filmes.length != 0">
-    <div v-for="filme in filmes">
+    <div class="content-movie" v-for="filme in filmes">
       <Card v-bind:filme="filme" />
     </div>
   </div>
@@ -56,8 +56,13 @@ export default {
 }
 .movies {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  width: 100%;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.content-movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 </style>
