@@ -1,4 +1,5 @@
 <template>
+  <Header></Header>
   <div class="movies" v-if="filmes.length != 0">
     <div class="content-movie" v-for="filme in filmes">
       <Card v-bind:filme="filme" />
@@ -11,10 +12,12 @@
 </template>
 
 <script>
+import Header from "../components/Header.vue";
 import Card from "../components/Card.vue";
 export default {
   name: "HomeView",
   components: {
+    Header,
     Card,
   },
 
