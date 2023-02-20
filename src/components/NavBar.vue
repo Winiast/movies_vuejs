@@ -32,5 +32,11 @@ export default {
   .navbar-content img {
     width: 180px;
   }
+
+  .navbar-content {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 50px;
+  }
 }
 </style>
