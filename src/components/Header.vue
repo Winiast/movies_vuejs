@@ -33,6 +33,11 @@
               class="content-filter-types-btn-others"
             >
               {{ category.name }}
+              <img
+                src="../assets/sair.png"
+                alt="botãoSair"
+                v-on:click="console.log('clicado')"
+              />
             </button>
           </div>
         </div>
@@ -150,6 +155,16 @@ export default {
   background: #d18000;
   color: #ffffff;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-filter-types-btn-others img {
+  width: 20px;
+  margin-left: 10px;
+  padding-bottom: 5px;
+  align-content: center;
 }
 
 .content-filter-types-btn:hover {
