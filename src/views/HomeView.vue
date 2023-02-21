@@ -1,9 +1,11 @@
 <template>
-  <Header></Header>
+  <Header v-on:filter-popular="filterPopular"></Header>
   <div class="movies" v-if="filmes.length != 0">
     <div class="content-movie" v-for="filme in filmes">
       <Card v-bind:filme="filme" />
     </div>
+
+    <button v-on:click="mostrar">Aqui</button>
   </div>
 
   <div v-else>
@@ -24,7 +26,8 @@ export default {
   data() {
     return {
       filmes: [],
-      URL: "https://api.themoviedb.org/3/trending/movie/day?",
+      URL: "https://api.themoviedb.org/3/",
+      filter: [],
     };
   },
   async created() {
@@ -42,10 +45,20 @@ export default {
   methods: {
     async requestMovies() {
       const response = await fetch(
-        `${this.URL}api_key=${import.meta.env.VITE_MOVIES_DB_KEY}`
+        `${this.URL}trending/movie/day?api_key=${
+          import.meta.env.VITE_MOVIES_DB_KEY
+        }`
       );
       const result = await response.json();
       return result;
+    },
+
+    filterPopular(event) {
+      this.filter.push(event);
+    },
+
+    mostrar() {
+      console.log(this.filter);
     },
   },
 };

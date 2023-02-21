@@ -13,12 +13,26 @@
           <div
             class="content-filter-types-container"
             v-for="category in categories"
+            v-bind:key="category"
           >
             <button
-              v-on:click="filterPopular(category)"
+              v-if="category.status === false"
+              v-on:click="
+                $emit('filterPopular', category), alterarEstado(category.name)
+              "
               class="content-filter-types-btn"
             >
-              {{ category }}
+              {{ category.name }}
+            </button>
+
+            <button
+              v-else
+              v-on:click="
+                $emit('filterPopular', category), alterarEstado(category.name)
+              "
+              class="content-filter-types-btn-others"
+            >
+              {{ category.name }}
             </button>
           </div>
         </div>
@@ -36,27 +50,41 @@ export default {
     NavBar,
   },
 
+  emits: ["filterPopular"],
+
   data() {
     return {
       categories: [
-        "Ação",
-        "Aventura",
-        "Animação",
-        "Comédia",
-        "Crime",
-        "Documentário",
-        "Drama",
-        "Familia",
-        "Fantasia",
-        "Ficção Científica",
-        "Romance",
-        "Terror",
+        { name: "Ação", status: false },
+        { name: "Aventura", status: false },
+        { name: "Animação", status: true },
+        // "Comédia",
+        // "Crime",
+        // "Documentário",
+        // "Drama",
+        // "Familia",
+        // "Fantasia",
+        // "História",
+        // "Ficção Científica",
+        // "Romance",
+        // "Música",
+        // "Mistério",
+        // "Cinema TV",
+        // "Guerra",
+        // "Faroeste",
+        // "Terror",
       ],
+
+      showButtonPressed: false,
     };
   },
   methods: {
-    filterPopular(category) {
-      console.log(category);
+    alterarEstado(nameCategory) {
+      this.categories.forEach((category) => {
+        if (category.name === nameCategory) {
+          category.status = !category.status;
+        }
+      });
     },
   },
 };
@@ -111,6 +139,25 @@ export default {
   font-weight: 700;
 }
 
+.content-filter-types-btn-others {
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  background: #d18000;
+  color: #ffffff;
+  border: none;
+}
+
+.content-filter-types-btn:hover {
+  background: #d18000;
+  color: #ffffff;
+  border: none;
+}
+
 @media screen and (min-width: 768px) {
   .content {
     display: flex;
@@ -122,7 +169,7 @@ export default {
   .content-title {
     text-align: center;
     font-size: 2rem;
-    width: 900px;
+    width: 70%;
     margin: 30px;
     line-height: 60px;
   }
@@ -132,6 +179,15 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .content-filter-types {
+    width: 80%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
   }
 }
 </style>
