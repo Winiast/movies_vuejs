@@ -58,9 +58,9 @@ export default {
       const response = await fetch(
         `${this.URL}discover/movie?api_key=${
           import.meta.env.VITE_MOVIES_DB_KEY
-        }&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&vote_count.gte=500&with_genres=${
-          this.teste
-        }&with_watch_monetization_types=flatrate`
+        }&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&vote_count.gte=500&with_genres=${this.filter.join(
+          ","
+        )}&with_watch_monetization_types=flatrate`
       );
       const result = await response.json();
       return result;
@@ -68,7 +68,7 @@ export default {
 
     // Adiciona a categoria clicada no array de filtro
     async filterPopular(event) {
-      this.filter.push(event);
+      this.filter.push(event.id);
       const updateMovies = await this.requestFilterMovies();
       this.filmes = updateMovies.results.map((item) => {
         return {

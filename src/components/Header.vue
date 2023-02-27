@@ -61,7 +61,6 @@ export default {
   data() {
     return {
       categories: [],
-      teste: [{ name: "Ação", status: false }],
       showButtonPressed: false,
     };
   },
