@@ -15,8 +15,7 @@
             v-for="category in categories"
             v-bind:key="category"
           >
-
-          <!-- Colocar em um componente próprio -->
+            <!-- Colocar em um componente próprio -->
             <button
               v-if="category.status === false"
               v-on:click="
@@ -55,31 +54,14 @@ export default {
     NavBar,
   },
 
+  props: ["URL"],
+
   emits: ["filterPopular"],
 
   data() {
     return {
-      categories: [
-        { name: "Ação", status: false },
-        { name: "Aventura", status: false },
-        { name: "Animação", status: false },
-        { name: "Comédia", status: false },
-        { name: "Crime", status: false },
-        { name: "Documentário", status: false },
-        { name: "Drama", status: false },
-        { name: "Familia", status: false },
-        { name: "Fantasia", status: false },
-        { name: "História", status: false },
-        { name: "Ficção Científica", status: false },
-        { name: "Romance", status: false },
-        { name: "Música", status: false },
-        { name: "Mistério", status: false },
-        { name: "Cinema TV", status: false },
-        { name: "Guerra", status: false },
-        { name: "Faroeste", status: false },
-        { name: "Terror", status: false },
-      ],
-
+      categories: [],
+      teste: [{ name: "Ação", status: false }],
       showButtonPressed: false,
     };
   },
@@ -91,6 +73,28 @@ export default {
         }
       });
     },
+
+    async searchGenres() {
+      const response = await fetch(
+        `${this.URL}genre/movie/list?api_key=${
+          import.meta.env.VITE_MOVIES_DB_KEY
+        }`
+      );
+      const result = await response.json();
+      return result;
+    },
+  },
+
+  async created() {
+    const resultGenres = await this.searchGenres();
+    this.categories = resultGenres.genres.map((item) => {
+      return {
+        ...item,
+        id: item.id,
+        name: item.name,
+        status: false,
+      };
+    });
   },
 };
 </script>

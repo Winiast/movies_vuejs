@@ -1,5 +1,5 @@
 <template>
-  <Header v-on:filter-popular="filterPopular"></Header>
+  <Header v-on:filter-popular="filterPopular" v-bind:URL="URL"></Header>
   <div class="movies" v-if="filmes.length != 0">
     <div class="content-movie" v-for="filme in filmes">
       <Card v-bind:filme="filme" />
