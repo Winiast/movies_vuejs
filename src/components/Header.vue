@@ -15,6 +15,8 @@
             v-for="category in categories"
             v-bind:key="category"
           >
+
+          <!-- Colocar em um componente próprio -->
             <button
               v-if="category.status === false"
               v-on:click="
@@ -27,16 +29,14 @@
 
             <button
               v-else
-              v-on:click="
-                $emit('filterPopular', category), alterarEstado(category.name)
-              "
+              v-on:click="$emit('filterPopular', category)"
               class="content-filter-types-btn-others"
             >
               {{ category.name }}
               <img
                 src="../assets/sair.png"
                 alt="botãoSair"
-                v-on:click="console.log('clicado')"
+                v-on:click="alterarEstado(category.name)"
               />
             </button>
           </div>
@@ -62,22 +62,22 @@ export default {
       categories: [
         { name: "Ação", status: false },
         { name: "Aventura", status: false },
-        { name: "Animação", status: true },
-        // "Comédia",
-        // "Crime",
-        // "Documentário",
-        // "Drama",
-        // "Familia",
-        // "Fantasia",
-        // "História",
-        // "Ficção Científica",
-        // "Romance",
-        // "Música",
-        // "Mistério",
-        // "Cinema TV",
-        // "Guerra",
-        // "Faroeste",
-        // "Terror",
+        { name: "Animação", status: false },
+        { name: "Comédia", status: false },
+        { name: "Crime", status: false },
+        { name: "Documentário", status: false },
+        { name: "Drama", status: false },
+        { name: "Familia", status: false },
+        { name: "Fantasia", status: false },
+        { name: "História", status: false },
+        { name: "Ficção Científica", status: false },
+        { name: "Romance", status: false },
+        { name: "Música", status: false },
+        { name: "Mistério", status: false },
+        { name: "Cinema TV", status: false },
+        { name: "Guerra", status: false },
+        { name: "Faroeste", status: false },
+        { name: "Terror", status: false },
       ],
 
       showButtonPressed: false,

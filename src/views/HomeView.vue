@@ -4,8 +4,6 @@
     <div class="content-movie" v-for="filme in filmes">
       <Card v-bind:filme="filme" />
     </div>
-
-    <button v-on:click="mostrar">Aqui</button>
   </div>
 
   <div v-else>
@@ -28,9 +26,11 @@ export default {
       filmes: [],
       URL: "https://api.themoviedb.org/3/",
       filter: [],
+      teste: 28,
     };
   },
   async created() {
+    // Utilizando o async/await para aguardar a resposta da API e depois atribuir os dados.
     const filterData = await this.requestMovies();
     this.filmes = filterData.results.map((item) => {
       return {
@@ -43,6 +43,7 @@ export default {
   },
 
   methods: {
+    // Solicitação da API para todos os filmes que estão nos top 50
     async requestMovies() {
       const response = await fetch(
         `${this.URL}trending/movie/day?api_key=${
@@ -53,12 +54,30 @@ export default {
       return result;
     },
 
-    filterPopular(event) {
-      this.filter.push(event);
+    async requestFilterMovies() {
+      const response = await fetch(
+        `${this.URL}discover/movie?api_key=${
+          import.meta.env.VITE_MOVIES_DB_KEY
+        }&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&vote_count.gte=500&with_genres=${
+          this.teste
+        }&with_watch_monetization_types=flatrate`
+      );
+      const result = await response.json();
+      return result;
     },
 
-    mostrar() {
-      console.log(this.filter);
+    // Adiciona a categoria clicada no array de filtro
+    async filterPopular(event) {
+      this.filter.push(event);
+      const updateMovies = await this.requestFilterMovies();
+      this.filmes = updateMovies.results.map((item) => {
+        return {
+          ...item,
+          title: item.title,
+          posterPath: item.poster_path,
+          dataMovie: item.release_date,
+        };
+      });
     },
   },
 };
