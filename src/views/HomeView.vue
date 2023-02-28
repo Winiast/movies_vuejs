@@ -2,7 +2,7 @@
   <Header v-on:filter-popular="filterPopular" v-bind:URL="URL"></Header>
   <div class="movies" v-if="filmes.length != 0">
     <div class="content-movie" v-for="filme in filmes">
-      <Card v-bind:filme="filme" />
+      <Card v-bind:filme="filme" v-on:click="showDetailsMovie" />
     </div>
   </div>
 
@@ -78,6 +78,11 @@ export default {
           dataMovie: item.release_date,
         };
       });
+    },
+
+    // Mostra os detalhes do filme clicado
+    showDetailsMovie(event) {
+      this.$router.push({ name: "Details", params: { id: event.id } });
     },
   },
 };
